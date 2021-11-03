@@ -1,0 +1,17 @@
+var getAssetDetails = Class.create();
+getAssetDetails.prototype = Object.extendsObject(AbstractAjaxProcessor, {
+	getUserAssets: function(){
+		var ci_tb = '<table style="width:50%" border="1px" cellspacing="1"><tr><th style="width:33%">Asset Tag</th><th style="width:33%">Serial Number</th><th style="width:34%">Model Name</th></tr>';
+		var gr = new GlideRecord('cmdb_ci');
+		gr.addQuery('assigned_to',gs.getUserID());
+		gr.query();
+		while(gr.next()){
+			ci_tb += '<tr><td>' + gr.asset_tag + '</td>';
+			ci_tb += '<td>' + gr.serial_number + '</td>';	
+			ci_tb += '<td>' + gr.model_id.display_name + '</td></tr>';	
+		}
+		ci_tb += '</table>';
+		return ci_tb;
+	},
+    type: 'getAssetDetails'
+});
