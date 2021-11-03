@@ -1,0 +1,14 @@
+function onLoad() {
+  
+  var ga = new GlideAjax('getAssetDetails');
+        ga.addParam('sysparm_name', 'getUserAssets');
+        
+
+        ga.getXML(getAssetDetails);
+		
+		function getAssetDetails(response){
+			var answer = response.responseXML.documentElement.getAttribute("answer");
+			g_form.setValue('list_of_assests', answer);			
+		}
+   
+}
